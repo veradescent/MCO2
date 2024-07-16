@@ -13,16 +13,8 @@ typedef struct {
     Node** adjLists;
 } Graph;
 
-typedef struct Queue {
-    int items[MAX_SIZE];
-    int front;
-    int rear;
-} Queue;
-
 void addEdges();
 void addNode();
 void createGraph();
-void insertNode();
-void deleteNode();
 
 #endif
