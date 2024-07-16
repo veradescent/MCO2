@@ -1,12 +1,28 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#define MAX_SIZE 256
+#define MAX_SIZE 100
 
 typedef struct {
-// vertices and pointer
+    int vertex;
+    Node* next;
+} Node;
+
+typedef struct {
+    int numVertices;
+    Node** adjLists;
 } Graph;
 
-// add node
-// add edge
-// create graph
+typedef struct Queue {
+    int items[MAX_SIZE];
+    int front;
+    int rear;
+} Queue;
+
+void addEdges();
+void addNode();
+void createGraph();
+void insertNode();
+void deleteNode();
+
+#endif
