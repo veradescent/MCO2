@@ -4,12 +4,12 @@
 #define MAX_VERTICES 100
 #define MAX_STRING_LENGTH 100
 
-typedef struct {
+typedef struct Node {
     char vertex[MAX_STRING_LENGTH];
     Node* next;
 } Node;
 
-typedef struct {
+typedef struct Graph {
     int numVertices;
     Node** adjLists;
     char** vertices;
