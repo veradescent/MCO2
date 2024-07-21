@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-// String typedef
+#define MAX_SIZE 100
+
+typedef char String[MAX_SIZE];
 
 bool startVertexExists(String input, String vertices[], int n){
   bool result = false;
@@ -15,14 +17,18 @@ bool startVertexExists(String input, String vertices[], int n){
   return result;
 }
 
-void calculateDegrees(){
+void calculateDegrees(Graph* graph, int degrees[]){
+  for (int i = 0; i < graph->numVertices; i++){
+    Node* temp = graph->adjLists[i];
+    while (temp){
+      degrees[i]++;
+      temp = temp->next;
+    }
+  }
 }
 
 int main (){
   String input;
-  String startVertex;
-  String vertices[MAX];
-  int numOfVertices;
   FILE* inputFile;
   FILE* outputFile;
 
@@ -31,21 +37,31 @@ int main (){
 
   inputFile = fopen(input, "r");
   if (inputFile == NULL){
-    printf("%s not found", inputd);
+    printf("%s not found", input);
     return 1;
   }
 
+  String startVertex;
   printf("Input start vertex for the traversal: ");
   scanf("%s", startVertex);
 
-  // read number of vertices and create graph
-  // add to array of vertices, add edge if string until it reaches -1
-  // iterate acc to num of vertices
-  fclose(inputFile);
-  
-  for (){
-    // iterate through array of vertices, until it finds the start vertex
+  int numVertices;
+  fscanf(inputFile, "%d", &numVertices);
+  Graph* graph = createGraph(numVertices);
+
+  String src, dest;
+  for (int i = 0; i < numVertices; i++){
+    fscanf(inputFile, "%s ", src);
+    
+    if () // -1
+      dest = NULL;
+    else
+      fscanf(inputFile, "%s ", dest);
+    
+    addEdge(graph, src, dest);
   }
+
+  fclose(inputFile);
   
   if (!startVertexExists(startVertex, vertices, numOfVertices)){ // start vertex does not exist
     printf("%s not found", startVertex);
@@ -53,15 +69,17 @@ int main (){
   }
 
   int degrees[MAX] = {0};
-  calculateDegrees();
-
+  calculateDegrees(graph, degrees);
+  
   outputFile = fopen("TRAVERSALS.TXT", "w");
   for (int i = 0; i < numOfVertices; i++){ // num of vertices
-    fprintf(outputFile, "%s  %d\n", vertices[i], degrees[i]);
+    fprintf(outputFile, "%s  %d\n", graph->vertices[i], degrees[i]);
   }
 
-  BFS();
-  DFS();
+  BFS(graph, graph->vertices[0], outputFile);
+
+  int visited[MAX_VERTICES] = {0};
+  DFS(graph, graph->vertices[0], visited, outputFile);
 
   fclose(outputFile);
   return 0;
