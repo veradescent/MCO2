@@ -50,4 +50,3 @@ void addEdge(Graph* graph, const char* src, const char* dest){
   newNode->next = graph->adjLists[destIndex];
   graph->adjLists[destIndex] = newNode;
 }
-}
